@@ -20,13 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	private static final int SKALIERTE_GROESSE = 200;
+	private static final int SKALIERTE_GROESSE = 320;
 	private static final String URI_SCHLUESSEL = "dieUri";
 	private Button zaehlButton;
-	private Button kameraButton;
+	private Button kameraButton,btnScale,btnConfirm;
 	private TextView bienenzahl;
-	private ImageView imageView;
-	//private boolean isBlackWhite;
+	private ImageView imageView,ivP1 ,ivP2 ,ivP3 ,ivP4;
 
 	private int grenzwert = 115;
 	private int bienenProProzentFlaeche = 10;
@@ -91,6 +90,40 @@ public class MainActivity extends Activity {
 					countBlackPixel, width * height));
 		}
 	};
+	//Confirm after Scale
+	private OnClickListener btnConfirmClickListener = new OnClickListener()
+	{
+		@Override
+		public void onClick(View v)
+		{
+			btnScale.setVisibility(View.VISIBLE);
+			btnConfirm.setVisibility(View.INVISIBLE);
+			ivP1.setVisibility(View.INVISIBLE);
+			ivP2.setVisibility(View.INVISIBLE);
+			ivP3.setVisibility(View.INVISIBLE);
+			ivP4.setVisibility(View.INVISIBLE);
+		}
+	};
+	//Scale Picture
+	private OnClickListener btnScaleClickListener = new OnClickListener()
+	{
+		@Override
+		public void onClick(View v)
+		{
+				btnScale.setVisibility(View.INVISIBLE);
+				btnConfirm.setVisibility(View.VISIBLE);
+				ivP1.setVisibility(View.VISIBLE);
+				ivP2.setVisibility(View.VISIBLE);
+				ivP3.setVisibility(View.VISIBLE);
+				ivP4.setVisibility(View.VISIBLE);
+				while ()
+				{
+
+				}
+
+		}
+
+	};
 	private OnClickListener kameraClickListener = new OnClickListener() {
 
 		@Override
@@ -107,8 +140,16 @@ public class MainActivity extends Activity {
 
 		setContentView(R.layout.activity_main);
 		imageView = (ImageView) findViewById(R.id.imageView);
+		ivP1 = (ImageView) findViewById(R.id.ivP1);
+		ivP2 = (ImageView) findViewById(R.id.ivP2);
+		ivP3 = (ImageView) findViewById(R.id.ivP3);
+		ivP4 = (ImageView) findViewById(R.id.ivP4);
 		zaehlButton = (Button) findViewById(R.id.button1);
 		zaehlButton.setOnClickListener(zaehlClickListener);
+		btnScale = (Button) findViewById(R.id.btnScale);
+		btnScale.setOnClickListener(btnScaleClickListener);
+		btnConfirm = (Button) findViewById(R.id.btnConfirm);
+		btnConfirm.setOnClickListener(btnConfirmClickListener);
 		bienenzahl = (TextView) findViewById(R.id.Bienenanzahl);
 		kameraButton = (Button) findViewById(R.id.kameraButton);
 		kameraButton.setOnClickListener(kameraClickListener);
@@ -127,7 +168,6 @@ public class MainActivity extends Activity {
 		imageUri = (Uri) savedInstanceState.get(URI_SCHLUESSEL);
 		Log.d(TAG, "Restaurierter URI Wert: " + imageUri);
 	}
-
 
 	public int berechneBienenZahl(int schwarz, int gesamtPixel) {
 		float bruchteilSchwarz = (float) schwarz / (float) gesamtPixel;
@@ -166,8 +206,10 @@ public class MainActivity extends Activity {
 					float w1 = bitmapVonKameraBild.getWidth();
 					float h1 = bitmapVonKameraBild.getHeight();
 					// auf eine H�he von 300 Pixel skalieren
-					int h2 = SKALIERTE_GROESSE;
-					int w2 = (int) (w1 / h1 * (float) h2);
+					//int h2 = SKALIERTE_GROESSE;
+					//int w2 = (int) (w1 / h1 * (float) h2);
+					int h2 = 200;
+					int w2 = 320;
 					Bitmap skaliert = Bitmap.createScaledBitmap(
 							bitmapVonKameraBild, w2, h2, false);
 
