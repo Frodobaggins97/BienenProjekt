@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
 	private Button kameraButton;
 	private TextView bienenzahl;
 	private ImageView imageView;
+	//private boolean isBlackWhite;
 
 	private int grenzwert = 115;
 	private int bienenProProzentFlaeche = 10;
@@ -34,7 +35,8 @@ public class MainActivity extends Activity {
 
 	private static final String TAG = "BienenZaehlApp";
 
-	private OnClickListener zaehlClickListener = new OnClickListener() {
+	private OnClickListener zaehlClickListener = new OnClickListener()
+	{
 
 		public void onClick(View v) {
 			Drawable drawable = imageView.getDrawable();
@@ -160,10 +162,10 @@ public class MainActivity extends Activity {
 					Bitmap bitmapVonKameraBild = MediaStore.Images.Media
 							.getBitmap(getContentResolver(), imageUri);
 
-					// Größe des aufgenommenen Bildes
+					// Grï¿½ï¿½e des aufgenommenen Bildes
 					float w1 = bitmapVonKameraBild.getWidth();
 					float h1 = bitmapVonKameraBild.getHeight();
-					// auf eine Höhe von 300 Pixel skalieren
+					// auf eine Hï¿½he von 300 Pixel skalieren
 					int h2 = SKALIERTE_GROESSE;
 					int w2 = (int) (w1 / h1 * (float) h2);
 					Bitmap skaliert = Bitmap.createScaledBitmap(
