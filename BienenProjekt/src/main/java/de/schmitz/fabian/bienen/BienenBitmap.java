@@ -16,7 +16,5 @@ public class BienenBitmap {
 	public int getBienenAnzahl() {
 		return bienenAnzahl;
 	}
-	
-	
 
 }

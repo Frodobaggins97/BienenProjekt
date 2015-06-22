@@ -26,7 +26,9 @@ public class MainActivity extends Activity {
 	private static final int SKALIERTE_GROESSE = 320;
 	private static final String URI_SCHLUESSEL = "dieUri";
 	private Button zaehlButton;
-	private Button kameraButton,btnScale,btnConfirm;
+	private Button kameraButton;
+	private Button btnScale;
+	private Button btnConfirm;
 	private TextView bienenzahl;
 	private ImageView imageView,ivP1 ,ivP2 ,ivP3 ,ivP4;
 	private float diffX,diffY;
@@ -35,6 +37,8 @@ public class MainActivity extends Activity {
 	private boolean rechneVerschiebung;
 	private int grenzwert = 115;
 	private int bienenProProzentFlaeche = 10;
+	private int anzahlBienenInsgesamt;
+
 
 	private static final int IMAGE_CAPTURE = 1000;
 
@@ -50,10 +54,11 @@ public class MainActivity extends Activity {
 				Bitmap bitmap = bitmapDrawable.getBitmap();
 				BienenBitmap bienenBitmap = erzeugeBienenBitmap(bitmap);
 
+				berechneBienenInsgesamt(bienenBitmap.getBienenAnzahl());
 				imageView.setImageBitmap(bienenBitmap.getBlackAndWhite());
-
 				bienenzahl.setText("Anzahl Bienen: "
-						+ bienenBitmap.getBienenAnzahl());
+						+ bienenBitmap.getBienenAnzahl() +
+						" Anzahl Bienen insgesamt" + anzahlBienenInsgesamt);
 
 			}
 		}
@@ -91,7 +96,6 @@ public class MainActivity extends Activity {
 					bwbitmap.setPixel(x, y, helligkeitGesamt);
 				}
 			}
-
 			return new BienenBitmap(bwbitmap, berechneBienenZahl(
 					countBlackPixel, width * height));
 		}
@@ -253,6 +257,16 @@ public class MainActivity extends Activity {
 		return (int) prozentSchwarz * bienenProProzentFlaeche;
 	}
 
+	/*public BienenInsgesamt berechneBienenInsgesamt (int BienenAktuell)
+	{
+
+		return new BienenInsgesamt(anzahlBienenInsgesamt + BienenAktuell);
+	}*/
+
+	public void berechneBienenInsgesamt (int Bienenaktuell)
+	{
+		anzahlBienenInsgesamt = anzahlBienenInsgesamt + Bienenaktuell;
+	}
 	private void startCamera() {
 		ContentValues values = new ContentValues();
 		values.put(MediaStore.Images.Media.TITLE, "Bienenknipser");
