@@ -28,10 +28,13 @@ public class MainActivity extends Activity {
 	private Button kameraButton,btnScale,btnConfirm;
 	private TextView bienenzahl;
 	private ImageView imageView,ivP1 ,ivP2 ,ivP3 ,ivP4;
-	private float diffX,diffY;
+	private float diffX,diffY,xcenter1;
+	private float ycenter1,ycenter2,ycenter3,ycenter4;
+	private float xcenter1,xcenter2,xcenter3,xcenter4;
 	private boolean rechneVerschiebung;
 	private int grenzwert = 115;
 	private int bienenProProzentFlaeche = 10;
+
 
 	private static final int IMAGE_CAPTURE = 1000;
 
@@ -248,6 +251,19 @@ public class MainActivity extends Activity {
 		float bruchteilSchwarz = (float) schwarz / (float) gesamtPixel;
 		float prozentSchwarz = 100 * bruchteilSchwarz;
 		return (int) prozentSchwarz * bienenProProzentFlaeche;
+	}
+
+	public float berechneMittelpunkt()
+	{
+		xcenter1= ivP1.getWidth/2;
+		ycenter1= ivP1.gethigh/2;
+		xcenter2= ivP2.getWidth/2;
+		ycenter2= ivP2.gethigh/2;
+		xcenter3= ivP3.getWidth/2;
+		ycenter3= ivP3.gethigh/2;
+		xcenter4= ivP4.getWidth/2;
+		ycenter4= ivP4.gethigh/2;
+
 	}
 
 	private void startCamera() {
