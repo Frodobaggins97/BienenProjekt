@@ -30,6 +30,8 @@ public class MainActivity extends Activity {
 	private TextView bienenzahl;
 	private ImageView imageView,ivP1 ,ivP2 ,ivP3 ,ivP4;
 	private float diffX,diffY;
+	private float xcenter1, xcenter2, xcenter3, xcenter4;
+	private float ycenter1, ycenter2, ycenter3, ycenter4;
 	private boolean rechneVerschiebung;
 	private int grenzwert = 115;
 	private int bienenProProzentFlaeche = 10;
@@ -269,6 +271,19 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 		startActivityForResult(intent, IMAGE_CAPTURE);
+	}
+
+	private void kreisMittelpunktBerechnen ()
+	{
+		ycenter1 = ivP1.getHeight();
+		ycenter2 = ivP2.getHeight();
+		ycenter3 = ivP3.getHeight();
+		ycenter4 = ivP4.getHeight();
+
+		xcenter1 = ivP1.getHeight();
+		xcenter2 = ivP2.getHeight();
+		xcenter3 = ivP3.getHeight();
+		xcenter4 = ivP4.getHeight();
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
