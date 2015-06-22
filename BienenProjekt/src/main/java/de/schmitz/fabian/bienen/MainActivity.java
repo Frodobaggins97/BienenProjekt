@@ -29,6 +29,7 @@ public class MainActivity extends Activity {
 	private Button kameraButton;
 	private Button btnScale;
 	private Button btnConfirm;
+	private Button btnReset;
 	private TextView bienenzahl;
 	private ImageView imageView,ivP1 ,ivP2 ,ivP3 ,ivP4;
 	private float diffX,diffY;
@@ -44,9 +45,19 @@ public class MainActivity extends Activity {
 
 	private static final String TAG = "BienenZaehlApp";
 
+	private OnClickListener resetClickListener = new OnClickListener()
+	{
+		public void onClick(View v)
+		{
+			anzahlBienenInsgesamt = 0;
+			bienenzahl.setText("Bienen Insgesamt zurückgesetzt");
+		}
+
+	};
+
 	private OnClickListener zaehlClickListener = new OnClickListener()
 	{
-
+		@Override
 		public void onClick(View v) {
 			Drawable drawable = imageView.getDrawable();
 			if (drawable instanceof BitmapDrawable) {
@@ -228,6 +239,9 @@ public class MainActivity extends Activity {
 		bienenzahl = (TextView) findViewById(R.id.Bienenanzahl);
 		kameraButton = (Button) findViewById(R.id.kameraButton);
 		kameraButton.setOnClickListener(kameraClickListener);
+		btnReset = (Button) findViewById(R.id.btnReset);
+		btnReset.setOnClickListener(resetClickListener);
+
 		ivP1.setOnTouchListener(ivP1TouchListener);
 		ivP2.setOnTouchListener(ivP2TouchListener);
 		ivP3.setOnTouchListener(ivP3TouchListener);
@@ -329,5 +343,4 @@ public class MainActivity extends Activity {
 			}
 		}
 	}
-
 }
