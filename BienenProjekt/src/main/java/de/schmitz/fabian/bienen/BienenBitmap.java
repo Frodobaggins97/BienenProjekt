@@ -2,19 +2,26 @@ package de.schmitz.fabian.bienen;
 
 import android.graphics.Bitmap;
 
+/**
+ * Created by fabian on 22.06.15.
+ */
 public class BienenBitmap {
-	private Bitmap blackAndWhite;
-	private int bienenAnzahl;
-	public BienenBitmap(Bitmap blackAndWhite, int bienenAnzahl) {
-		super();
-		this.blackAndWhite = blackAndWhite;
-		this.bienenAnzahl = bienenAnzahl;
-	}
-	public Bitmap getBlackAndWhite() {
-		return blackAndWhite;
-	}
-	public int getBienenAnzahl() {
-		return bienenAnzahl;
-	}
+    private int BienenAnzahl;
+    private Bitmap BlackAndWhite;
 
+    public BienenBitmap(Bitmap BlackAndWhite, int BienenAnzahl)
+    {
+       this.BienenAnzahl = BienenAnzahl;
+        this.BlackAndWhite = BlackAndWhite;
+    }
+
+    public int getBienenAnzahl()
+    {
+        return this.BienenAnzahl;
+    }
+
+    public Bitmap getBlackAndWhite()
+    {
+        return this.BlackAndWhite;
+    }
 }
