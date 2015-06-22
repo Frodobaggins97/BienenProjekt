@@ -1,6 +1,7 @@
-.metadata/
-.settings
-.classpath
-bin
-.project
-.idea
+/.gradle
+/.idea/workspace.xml
+/.idea/libaries
+.DS_Store
+/local.properties
+/BienenProjekt/build
+/build
