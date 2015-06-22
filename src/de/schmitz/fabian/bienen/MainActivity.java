@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,7 +28,8 @@ public class MainActivity extends Activity {
 	private Button kameraButton,btnScale,btnConfirm;
 	private TextView bienenzahl;
 	private ImageView imageView,ivP1 ,ivP2 ,ivP3 ,ivP4;
-
+	private float diffX,diffY;
+	private boolean rechneVerschiebung;
 	private int grenzwert = 115;
 	private int bienenProProzentFlaeche = 10;
 
@@ -102,6 +105,7 @@ public class MainActivity extends Activity {
 			ivP2.setVisibility(View.INVISIBLE);
 			ivP3.setVisibility(View.INVISIBLE);
 			ivP4.setVisibility(View.INVISIBLE);
+
 		}
 	};
 	//Scale Picture
@@ -110,20 +114,26 @@ public class MainActivity extends Activity {
 		@Override
 		public void onClick(View v)
 		{
+
 				btnScale.setVisibility(View.INVISIBLE);
 				btnConfirm.setVisibility(View.VISIBLE);
 				ivP1.setVisibility(View.VISIBLE);
 				ivP2.setVisibility(View.VISIBLE);
 				ivP3.setVisibility(View.VISIBLE);
 				ivP4.setVisibility(View.VISIBLE);
-				while ()
-				{
-
-				}
-
+			if(rechneVerschiebung)
+			{
+				diffX = ivP1.getWidth()/2;
+				diffY = (ivP4.getY()-ivP1.getY());
+				rechneVerschiebung = false;
+			}
 		}
-
 	};
+
+
+
+
+
 	private OnClickListener kameraClickListener = new OnClickListener() {
 
 		@Override
@@ -131,6 +141,64 @@ public class MainActivity extends Activity {
 			startCamera();
 		}
 	};
+
+	//Punkt1 wird verschoben
+	private OnTouchListener ivP1TouchListener = new OnTouchListener()
+	{
+		public boolean onTouch(View v , MotionEvent ev)
+		{
+
+			if (ev.getAction()==MotionEvent.ACTION_MOVE)
+			{
+					ivP1.setX(ev.getRawX()-diffX);
+					ivP1.setY(ev.getRawY()-diffY);
+			}
+			return true;
+		}
+	};
+	//Punkt2 wird verschoben
+	private OnTouchListener ivP2TouchListener = new OnTouchListener()
+	{
+		public boolean onTouch(View v , MotionEvent ev)
+		{
+
+			if (ev.getAction()==MotionEvent.ACTION_MOVE)
+			{
+				ivP2.setX(ev.getRawX()-diffX);
+				ivP2.setY(ev.getRawY()-diffY);
+			}
+			return true;
+		}
+	};
+	//Punkt3 wird verschoben
+	private OnTouchListener ivP3TouchListener = new OnTouchListener()
+	{
+		public boolean onTouch(View v , MotionEvent ev)
+		{
+
+			if (ev.getAction()==MotionEvent.ACTION_MOVE)
+			{
+				ivP3.setX(ev.getRawX()-diffX);
+				ivP3.setY(ev.getRawY()-diffY);
+			}
+			return true;
+		}
+	};
+	//Punkt4 wird verschoben
+	private OnTouchListener ivP4TouchListener = new OnTouchListener()
+	{
+		public boolean onTouch(View v , MotionEvent ev)
+		{
+
+			if (ev.getAction()==MotionEvent.ACTION_MOVE)
+			{
+				ivP4.setX(ev.getRawX()-diffX);
+				ivP4.setY(ev.getRawY()-diffY);
+			}
+			return true;
+		}
+	};
+
 	private Uri imageUri;
 
 	@Override
@@ -153,7 +221,14 @@ public class MainActivity extends Activity {
 		bienenzahl = (TextView) findViewById(R.id.Bienenanzahl);
 		kameraButton = (Button) findViewById(R.id.kameraButton);
 		kameraButton.setOnClickListener(kameraClickListener);
+		ivP1.setOnTouchListener(ivP1TouchListener);
+		ivP2.setOnTouchListener(ivP2TouchListener);
+		ivP3.setOnTouchListener(ivP3TouchListener);
+		ivP4.setOnTouchListener(ivP4TouchListener);
+		rechneVerschiebung = true;
+
 	}
+
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
