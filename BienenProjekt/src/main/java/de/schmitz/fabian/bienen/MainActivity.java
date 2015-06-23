@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+
+
 public class MainActivity extends Activity {
 	private static final int SKALIERTE_GROESSE = 320;
 	private static final String URI_SCHLUESSEL = "dieUri";
@@ -40,6 +42,8 @@ public class MainActivity extends Activity {
 	private int bienenProProzentFlaeche = 10;
 	private int anzahlBienenInsgesamt;
 
+
+	MittelpunkteDerKreise Zentren = new MittelpunkteDerKreise(1,1,1,1,1,1,1,1);
 
 	private static final int IMAGE_CAPTURE = 1000;
 
@@ -132,7 +136,6 @@ public class MainActivity extends Activity {
 		@Override
 		public void onClick(View v)
 		{
-
 				btnScale.setVisibility(View.INVISIBLE);
 				btnConfirm.setVisibility(View.VISIBLE);
 				ivP1.setVisibility(View.VISIBLE);
@@ -150,8 +153,6 @@ public class MainActivity extends Activity {
 
 
 
-
-
 	private OnClickListener kameraClickListener = new OnClickListener() {
 
 		@Override
@@ -159,6 +160,8 @@ public class MainActivity extends Activity {
 			startCamera();
 		}
 	};
+
+
 
 	//Punkt1 wird verschoben
 	private OnTouchListener ivP1TouchListener = new OnTouchListener()
@@ -174,6 +177,9 @@ public class MainActivity extends Activity {
 			return true;
 		}
 	};
+
+
+
 	//Punkt2 wird verschoben
 	private OnTouchListener ivP2TouchListener = new OnTouchListener()
 	{
@@ -188,6 +194,10 @@ public class MainActivity extends Activity {
 			return true;
 		}
 	};
+
+
+
+
 	//Punkt3 wird verschoben
 	private OnTouchListener ivP3TouchListener = new OnTouchListener()
 	{
@@ -202,6 +212,9 @@ public class MainActivity extends Activity {
 			return true;
 		}
 	};
+
+
+
 	//Punkt4 wird verschoben
 	private OnTouchListener ivP4TouchListener = new OnTouchListener()
 	{
@@ -216,6 +229,9 @@ public class MainActivity extends Activity {
 			return true;
 		}
 	};
+
+
+
 
 	private Uri imageUri;
 
@@ -248,7 +264,9 @@ public class MainActivity extends Activity {
 		ivP4.setOnTouchListener(ivP4TouchListener);
 		rechneVerschiebung = true;
 
+
 	}
+
 
 
 	@Override
@@ -258,6 +276,8 @@ public class MainActivity extends Activity {
 		outState.putParcelable(URI_SCHLUESSEL, imageUri);
 	}
 
+
+
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
@@ -265,17 +285,15 @@ public class MainActivity extends Activity {
 		Log.d(TAG, "Restaurierter URI Wert: " + imageUri);
 	}
 
+
+
 	public int berechneBienenZahl(int schwarz, int gesamtPixel) {
 		float bruchteilSchwarz = (float) schwarz / (float) gesamtPixel;
 		float prozentSchwarz = 100 * bruchteilSchwarz;
 		return (int) prozentSchwarz * bienenProProzentFlaeche;
 	}
 
-	/*public BienenInsgesamt berechneBienenInsgesamt (int BienenAktuell)
-	{
 
-		return new BienenInsgesamt(anzahlBienenInsgesamt + BienenAktuell);
-	}*/
 
 	public void berechneBienenInsgesamt (int Bienenaktuell)
 	{
@@ -303,15 +321,27 @@ public class MainActivity extends Activity {
 
 	private void kreisMittelpunktBerechnen ()
 	{
-		ycenter1 = ivP1.getHeight();
-		ycenter2 = ivP2.getHeight();
-		ycenter3 = ivP3.getHeight();
-		ycenter4 = ivP4.getHeight();
+		ycenter1 = ivP1.getY()+ivP1.getHeight()/2;
+		ycenter2 = ivP2.getY()+ivP2.getHeight()/2;
+		ycenter3 = ivP3.getY()+ivP3.getHeight()/2;
+		ycenter4 = ivP4.getY()+ivP4.getHeight()/2;
 
-		xcenter1 = ivP1.getHeight();
-		xcenter2 = ivP2.getHeight();
-		xcenter3 = ivP3.getHeight();
-		xcenter4 = ivP4.getHeight();
+		xcenter1 = ivP1.getX()+ivP1.getWidth()/2;
+		xcenter2 = ivP2.getX()+ivP2.getWidth()/2;
+		xcenter3 = ivP3.getX()+ivP3.getWidth()/2;
+		xcenter4 = ivP4.getX()+ivP4.getWidth()/2;
+
+		Zentren.setYcenter1(ycenter1);
+		Zentren.setYcenter2(ycenter2);
+		Zentren.setYcenter3(ycenter3);
+		Zentren.setYcenter4(ycenter4);
+		Zentren.setXcenter1(xcenter1);
+		Zentren.setXcenter2(xcenter2);
+		Zentren.setXcenter3(xcenter3);
+		Zentren.setXcenter4(xcenter4);
+
+
+
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
