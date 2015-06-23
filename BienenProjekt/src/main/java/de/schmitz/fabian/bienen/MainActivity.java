@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
+	//region Variablen
 	private static final int SKALIERTE_GROESSE = 320;
 	private static final String URI_SCHLUESSEL = "dieUri";
 	private Button zaehlButton;
@@ -44,11 +45,12 @@ public class MainActivity extends Activity {
 
 
 	MittelpunkteDerKreise Zentren = new MittelpunkteDerKreise(1,1,1,1,1,1,1,1);
+	//endregion
 
 	private static final int IMAGE_CAPTURE = 1000;
 
 	private static final String TAG = "BienenZaehlApp";
-
+//region Reset und Kamera
 	private OnClickListener resetClickListener = new OnClickListener()
 	{
 		public void onClick(View v)
@@ -58,7 +60,15 @@ public class MainActivity extends Activity {
 		}
 
 	};
+	private OnClickListener kameraClickListener = new OnClickListener() {
 
+		@Override
+		public void onClick(View v) {
+			startCamera();
+		}
+	};
+	//endregion
+//region Zählbutton
 	private OnClickListener zaehlClickListener = new OnClickListener()
 	{
 		@Override
@@ -115,7 +125,8 @@ public class MainActivity extends Activity {
 					countBlackPixel, width * height));
 		}
 	};
-	//Confirm after Scale
+	//endregion
+	// region Scale and Confirm
 	private OnClickListener btnConfirmClickListener = new OnClickListener()
 	{
 		@Override
@@ -130,7 +141,7 @@ public class MainActivity extends Activity {
 
 		}
 	};
-	//Scale Picture
+	//scale
 	private OnClickListener btnScaleClickListener = new OnClickListener()
 	{
 		@Override
@@ -150,19 +161,8 @@ public class MainActivity extends Activity {
 			}
 		}
 	};
-
-
-
-	private OnClickListener kameraClickListener = new OnClickListener() {
-
-		@Override
-		public void onClick(View v) {
-			startCamera();
-		}
-	};
-
-
-
+	//endregion
+//region Punkte schieben
 	//Punkt1 wird verschoben
 	private OnTouchListener ivP1TouchListener = new OnTouchListener()
 	{
@@ -230,9 +230,8 @@ public class MainActivity extends Activity {
 		}
 	};
 
-
-
-
+//endregion
+//region Create
 	private Uri imageUri;
 
 	@Override
@@ -266,8 +265,8 @@ public class MainActivity extends Activity {
 
 
 	}
-
-
+//endregion
+//region Zwischenspeicher
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
@@ -284,8 +283,8 @@ public class MainActivity extends Activity {
 		imageUri = (Uri) savedInstanceState.get(URI_SCHLUESSEL);
 		Log.d(TAG, "Restaurierter URI Wert: " + imageUri);
 	}
-
-
+//endregion
+//region Rechne Bienen
 
 	public int berechneBienenZahl(int schwarz, int gesamtPixel) {
 		float bruchteilSchwarz = (float) schwarz / (float) gesamtPixel;
@@ -318,7 +317,8 @@ public class MainActivity extends Activity {
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 		startActivityForResult(intent, IMAGE_CAPTURE);
 	}
-
+	//endregion
+//region Mittelpunkte geben
 	private void kreisMittelpunktBerechnen ()
 	{
 		ycenter1 = ivP1.getY()+ivP1.getHeight()/2;
@@ -343,6 +343,7 @@ public class MainActivity extends Activity {
 
 
 	}
+	//endregion
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == IMAGE_CAPTURE) {
