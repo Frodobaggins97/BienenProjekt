@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
 	private int grenzwert = 115;
 	private int bienenProProzentFlaeche = 10;
 	private int anzahlBienenInsgesamt;
+	
 
 
 	MittelpunkteDerKreise Zentren = new MittelpunkteDerKreise(1,1,1,1,1,1,1,1);
@@ -63,6 +64,7 @@ public class MainActivity extends Activity {
 	{
 		@Override
 		public void onClick(View v) {
+
 			Drawable drawable = imageView.getDrawable();
 			if (drawable instanceof BitmapDrawable) {
 				BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
@@ -340,9 +342,9 @@ public class MainActivity extends Activity {
 		Zentren.setXcenter3(xcenter3);
 		Zentren.setXcenter4(xcenter4);
 
-
-
 	}
+
+
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == IMAGE_CAPTURE) {
